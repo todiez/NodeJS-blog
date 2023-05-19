@@ -58,15 +58,16 @@ router.get("", async (req, res) => {
  * Post :id
  */
 router.get('/post/:id', async (req, res) => {
-    try {
-        const locals = {
-            title: "NodeJS Blog",
-            description: "Simple Blog created with NodeJS, Express & MongoDB"
-        }
-
+    try {        
         let slug = req.params.id;
 
         const data = await Post.findById( { _id: slug} );
+
+        const locals = {
+            title: data.title,
+            description: "Simple Blog created with NodeJS, Express & MongoDB"
+        }
+
         res.render("post", { locals, data });
     } catch (error) {
         console.log(error);
