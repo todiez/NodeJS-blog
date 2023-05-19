@@ -6,7 +6,6 @@ const Post = require("../models/Post");
  * GET
  * HOME
  */
-
 router.get("", async (req, res) => {
   try {
     const locals = {
@@ -51,6 +50,31 @@ router.get("", async (req, res) => {
 //         console.log(error);
 //     }
 // });
+
+
+
+/**
+ * GET
+ * Post :id
+ */
+router.get('/post/:id', async (req, res) => {
+    try {
+        const locals = {
+            title: "NodeJS Blog",
+            description: "Simple Blog created with NodeJS, Express & MongoDB"
+        }
+
+        let slug = req.params.id;
+
+        const data = await Post.findById( { _id: slug} );
+        res.render("post", { locals, data });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
 
 router.get("/about", (req, res) => {
   res.render("aboudfst");
