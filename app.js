@@ -10,6 +10,7 @@ const PORT = 5000 || process.env.PORT;
 //connect to DB
 connectDB();
 
+
 app.use(express.static('public'));
 
 //Templating Engine
