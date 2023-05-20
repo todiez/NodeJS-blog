@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
+const User = require("../models/User");
+
+const adminLayout = '../views/layouts/admin'
 
 /**
  * GET
@@ -12,7 +15,7 @@ router.get('/admin', async (req, res) => {
             title: "Admin",
             description: "Simple Blog created with NodeJS, Express & MongoDB"
         }
-        res.render("index", { locals });
+        res.render("admin/index", { locals, layout: adminLayout });
     } catch (error) {
         console.log(error);
     }
