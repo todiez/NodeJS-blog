@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 const User = require("../models/User");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const adminLayout = '../views/layouts/admin'
 
@@ -21,5 +23,36 @@ router.get('/admin', async (req, res) => {
     }
 });
 
+/**
+ * POST
+ * Admin - Check Login Page
+ */
+router.post('/admin', async (req, res) => {
+    try {
+        //basic logic for login
+        const { username , password } = req.body;
+        console.log(req.body);
+        
+        res.redirect('/admin');
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+/**
+ * POST
+ * Admin - SignUp Page
+ */
+router.post('/register', async (req, res) => {
+    try {
+        //basic logic for login
+        const { username , password } = req.body;
+        console.log(req.body);
+        
+        res.redirect('/admin');
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;
