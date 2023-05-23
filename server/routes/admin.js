@@ -28,8 +28,6 @@ const authMiddleware = (req, res, next) => {
     }
 }
 
-
-
 /**
  * GET
  * Admin - Login Page
@@ -219,5 +217,17 @@ router.delete("/delete-post/:id", authMiddleware, async (req, res) => {
     console.log(error);
   }    
 });
+
+
+  /**
+ * GET
+ * Admin - Logout
+ */
+  router.get("/logout", authMiddleware, async (req, res) => {
+    res.clearCookie('token');
+    //res.json( {message: 'Logout successfull'} )
+    res.redirect('/');
+
+  });
 
 module.exports = router;
