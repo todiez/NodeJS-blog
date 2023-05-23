@@ -99,7 +99,7 @@ router.get("/dashboard", authMiddleware, async (req, res) => {
 
 /**
  * GET
- * Admin Create new post
+ * Admin Create New Post
  */
 router.get("/add-post", authMiddleware, async (req, res) => {
   try {
@@ -135,6 +135,23 @@ router.post("/add-post", authMiddleware, async (req, res) => {
       console.log(error);
     }
     res.redirect('/dashboard')      
+  } catch (error) {
+    console.log(error);
+  }    
+});
+
+/**
+ * PUT
+ * Edit Existing Post
+ */
+router.put("/edit-post/:id", authMiddleware, async (req, res) => {
+  try {
+      await Post.findByIdAndUpdate(req.params.id, {
+        title: req.body.title,
+        body: req.body.body,
+        updatedAt: Date.now()
+      });
+      res.redirect(`/edit-post/${req.params.id}`);
   } catch (error) {
     console.log(error);
   }    
