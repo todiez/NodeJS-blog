@@ -141,6 +141,28 @@ router.post("/add-post", authMiddleware, async (req, res) => {
 });
 
 /**
+ * GET
+ * Edit Existing Post
+ */
+router.get("/edit-post/:id", authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: "Edit Post",
+      description: "Simple Blog created with NodeJS, Express & MongoDB",
+    };
+
+    const data = await Post.findOne({ _id: req.params.id})
+      res.render(`admin/edit-post`, {
+        locals,
+        data,
+        layout: adminLayout
+      });
+  } catch (error) {
+    console.log(error);
+  }    
+});
+
+/**
  * PUT
  * Edit Existing Post
  */
@@ -183,5 +205,19 @@ router.post('/register', async (req, res) => {
       console.log(error);
     }
   });
+
+
+  /**
+ * DELETE
+ * Admin - Delete Existing Post
+ */
+router.delete("/delete-post/:id", authMiddleware, async (req, res) => {
+  try {
+      await Post.deleteOne( {_id: req.params.id});
+      res.redirect(`/dashboard`);
+  } catch (error) {
+    console.log(error);
+  }    
+});
 
 module.exports = router;
